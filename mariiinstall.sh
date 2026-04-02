@@ -1,10 +1,6 @@
 #!/bin/bash
 set -e
 
-if [ "$EUID" -ne 0 ]; then
-    echo "This script must be run as root. Please use sudo."
-    exit 1
-fi
 echo "welcome to the huge installation of my linux setup"
 read
 echo "this setup is what i use on a daily basis"
