@@ -146,7 +146,7 @@ if [ "$usr_choice1" == "u" ]; then
 		)
 
 		aur_pkgs=(
-			brave-bin debtap hypremoji hyprmon-bin mongodb-bin quickshell-git sdl2-jstest spotify sway-colord ttf-apple-emoji waypaper yay yay-debug zscroll-git
+			brave-bin debtap hypremoji hyprmon-bin mongodb-bin quickshell-git sdl2-jstest ttf-apple-emoji waypaper zscroll-git
 		)
 
 		echo "removing pacman packages..."
