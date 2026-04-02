@@ -9,7 +9,7 @@ echo "this requires a proper internet connection so please ensure that you're co
 read
 read -p "would you like to proceed?? this may take a while depending on specs: [y/n]" usr_choice1 
 
-if [ $usr_choice1 == "y" ] then
+if [ "$usr_choice1" == "y" ]; then
 
 	echo "now installing all packages on your system..."
 	sleep 3
@@ -114,7 +114,7 @@ if [ $usr_choice1 == "y" ] then
 	exit
 fi
 
-if [ $usr_choice1 == "n" ] then
+if [ "$usr_choice1" == "n" ]; then
 	echo "ill see you when you need me"
 	sleep 1
 	exit
