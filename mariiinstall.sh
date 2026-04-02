@@ -49,7 +49,7 @@ if [ "$usr_choice1" == "i" ]; then
 	pkgs+=("$jack_pkg")
 
 	aur_pkgs=(
-		brave-bin debtap hypremoji hyprmon-bin mongodb-bin quickshell-git sdl2-jstest spotify sway-colord ttf-apple-emoji waypaper yay yay-debug zscroll-git
+		brave-bin debtap hypremoji hyprmon-bin mongodb-bin quickshell-git sdl2-jstest ttf-apple-emoji waypaper zscroll-git
 	)
 
 	aur_pkgs_filtered=()
@@ -72,6 +72,7 @@ if [ "$usr_choice1" == "i" ]; then
 			pacman -S --needed --noconfirm "$pkg"
 		fi
 	done
+	sudo -u "$SUDO_USER" bash -c 'cd /tmp && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm'
 
 	for aur_pkg in "${aur_pkgs_filtered[@]}"; do
 		if ! package_exists "$aur_pkg"; then
