@@ -41,7 +41,7 @@ if [ "$usr_choice1" == "y" ]; then
 	done
 
 	for pkg in "${pkgs[@]}"; do
-		sudo pacman -S --needed "$pkg"
+		sudo pacman -S --needed --noconfirm "$pkg"
 	done
 
 	for aur_pkg in "${aur_pkgs_filtered[@]}"; do
