@@ -24,6 +24,11 @@ if [ "$usr_choice1" == "i" ]; then
 	pacman -Sy --noconfirm
 	sleep 1
 	
+	# Remove conflicting jack package if present, since we use pipewire-jack
+	if pacman -Qi jack >/dev/null 2>&1; then
+		pacman -R --noconfirm jack || true
+	fi
+
 	pkgs=(
 		alacritty base base-devel blueman bluez bluez-obex bluez-utils cava chafa cliphist cmake cmatrix code cowsay cpio discord dotnet-sdk efibootmgr evtest fastfetch firejail fish font-manager fuzzel fzf gimp git grim gst-plugin-pipewire htop hypridle hyprland hyprlock hyprsunset intel-media-driver intel-ucode iwd kanshi kew
 		lib32-giflib lib32-gtk3 lib32-libpulse lib32-libxslt lib32-mpg123 lib32-ocl-icd lib32-openal lib32-v4l-utils libpulse libva-intel-driver limine linux-firmware linux-lts linux-lts-headers linuxconsole ly mako mono mpv nano nemo neovim niri ntfs-3g
