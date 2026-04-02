@@ -9,14 +9,18 @@ echo "and this script will provide that for your arch linux installation"
 read
 echo "this requires a proper internet connection so please ensure that you're connected before use. .-."
 read
-read -p "would you like to [i]nstall or [u]ninstall? [i/u]" usr_choice1 
+read -p "would you like to [i]nstall or [u]ninstall? [i/u]" usr_choice1
+
+# Request password early for sudo commands
+echo "this operation requires root privileges."
+sudo -v
 
 if [ "$usr_choice1" == "i" ]; then
 
 	echo "now installing all packages on your system..."
 	sleep 3
 	
-	sudo sed -i '/^#\[multilib\]/,/^#Include/ s/^#//' /etc/pacman.conf
+	sed -i '/^#\[multilib\]/,/^#Include/ s/^#//' /etc/pacman.conf
 	pacman -Sy --noconfirm
 	sleep 1
 	
