@@ -16,7 +16,7 @@ if [ "$usr_choice1" == "i" ]; then
 	echo "now installing all packages on your system..."
 	sleep 3
 	
-	sed -i '/^#\[multilib\]/,/^#Include/ s/^#//' /etc/pacman.conf
+	sudo sed -i '/^#\[multilib\]/,/^#Include/ s/^#//' /etc/pacman.conf
 	pacman -Sy --noconfirm
 	sleep 1
 	
