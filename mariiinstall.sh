@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+if [ "$EUID" -ne 0 ]; then
+    echo "This script must be run as root. Please use sudo."
+    exit 1
+fi
+
 echo "welcome to the huge installation of my linux setup"
 read
 echo "this setup is what i use on a daily basis"
@@ -9,11 +14,7 @@ echo "and this script will provide that for your arch linux installation"
 read
 echo "this requires a proper internet connection so please ensure that you're connected before use. .-."
 read
-read -p "would you like to [i]nstall or [u]ninstall? [i/u]" usr_choice1
-
-# Request password early for sudo commands
-echo "this operation requires root privileges."
-sudo -v
+read -p "would you like to [i]nstall or [u]ninstall? [i/u]" usr_choice1 
 
 if [ "$usr_choice1" == "i" ]; then
 
@@ -68,13 +69,13 @@ if [ "$usr_choice1" == "i" ]; then
 
 	for pkg in "${pkgs[@]}"; do
 		if ! package_exists "$pkg"; then
-			sudo pacman -S --needed --noconfirm "$pkg"
+			pacman -S --needed --noconfirm "$pkg"
 		fi
 	done
 
 	for aur_pkg in "${aur_pkgs_filtered[@]}"; do
 		if ! package_exists "$aur_pkg"; then
-			yay -S --needed --noconfirm "$aur_pkg"
+			sudo -u "$SUDO_USER" yay -S --needed --noconfirm "$aur_pkg"
 		fi
 	done
 
