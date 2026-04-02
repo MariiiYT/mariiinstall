@@ -27,9 +27,7 @@ if [ "$usr_choice1" == "y" ]; then
 	)
 
 	aur_pkgs=(
-		alacritty base base-devel blueman bluez bluez-obex bluez-utils brave-bin cava chafa cliphist cmake cmatrix code cowsay cpio debtap discord dn-famitracker-bin dotnet-sdk efibootmgr evtest fastfetch firejail fish font-manager fuzzel fzf gimp git grim gst-plugin-pipewire htop hypremoji hypridle hyprland hyprlock hyprmon-bin hyprsunset intel-media-driver intel-ucode iwd kanshi kew
-		lib32-giflib lib32-gtk3 lib32-libpulse lib32-libxslt lib32-mpg123 lib32-ocl-icd lib32-openal lib32-v4l-utils libpulse libva-intel-driver limine linux-firmware linux-lts linux-lts-headers linuxconsole ly mako mongodb-bin mono mov-cli mpv mupen64plus nano nemo neovim niri ntfs-3g
-		nwg-look obs-studio openssh pastel pavucontrol pipewire pipewire-alsa pipewire-jack pipewire-pulse polkit python-mov-cli-youtube python-pip python-pipx qt5-tools qt6-tools qt6ct quickshell-git retroarch rofi sassc sdl2-jstest slurp smartmontools spotify starship sudo superfile supertux supertuxkart sway sway-colord swaybg swayidle swaylock swww tmux ttf-apple-emoji udiskie vim vulkan-intel vulkan-nouveau vulkan-radeon waypaper wev wget wine winetricks wireless_tools wireplumber xdg-desktop-portal-gnome xdg-desktop-portal-hyprland xdg-utils xf86-video-amdgpu xf86-video-ati xf86-video-nouveau xorg-server xorg-xinit xorg-xwayland yay yay-debug zram-generator zscroll-git
+		brave-bin debtap hypremoji hyprmon-bin mongodb-bin mov-cli python-mov-cli-youtube quickshell-git sdl2-jstest spotify sway-colord ttf-apple-emoji waypaper yay yay-debug zscroll-git
 	)
 
 	# Filter out packages that are already in pacman
@@ -40,12 +38,25 @@ if [ "$usr_choice1" == "y" ]; then
 		fi
 	done
 
+	# Function to check if package files already exist in filesystem
+	package_exists() {
+		local pkg=$1
+		if pacman -Ql "$pkg" 2>/dev/null | cut -d' ' -f2- | grep -q .; then
+			return 0  # Package exists
+		fi
+		return 1  # Package doesn't exist
+	}
+
 	for pkg in "${pkgs[@]}"; do
-		sudo pacman -S --needed --noconfirm "$pkg"
+		if ! package_exists "$pkg"; then
+			sudo pacman -S --needed --noconfirm "$pkg"
+		fi
 	done
 
 	for aur_pkg in "${aur_pkgs_filtered[@]}"; do
-		yay -S --needed --noconfirm "$aur_pkg"
+		if ! package_exists "$aur_pkg"; then
+			yay -S --needed --noconfirm "$aur_pkg"
+		fi
 	done
 
 	python3 -m pip install -r <(python3 -m pip freeze)
