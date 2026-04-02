@@ -13,9 +13,9 @@ echo "and this script will provide that for your arch linux installation"
 read
 echo "this requires a proper internet connection so please ensure that you're connected before use. .-."
 read
-read -p "would you like to proceed?? this may take a while depending on specs: [y/n]" usr_choice1 
+read -p "would you like to [i]nstall or [u]ninstall? [i/u]" usr_choice1 
 
-if [ "$usr_choice1" == "y" ]; then
+if [ "$usr_choice1" == "i" ]; then
 
 	echo "now installing all packages on your system..."
 	sleep 3
@@ -115,6 +115,53 @@ if [ "$usr_choice1" == "y" ]; then
 
 	sleep 2
 	exit
+fi
+
+if [ "$usr_choice1" == "u" ]; then
+	echo "WARNING: This will uninstall all packages and remove configuration files!"
+	read -p "Are you absolutely sure? [y/n]" uninstall_confirm
+	
+	if [ "$uninstall_confirm" == "y" ]; then
+		echo "starting uninstallation process..."
+		sleep 3
+		
+		pkgs=(
+			alacritty base base-devel blueman bluez bluez-obex bluez-utils cava chafa cliphist cmake cmatrix code cowsay cpio discord dotnet-sdk efibootmgr evtest fastfetch firejail fish font-manager fuzzel fzf gimp git grim gst-plugin-pipewire htop hypridle hyprland hyprlock hyprsunset intel-media-driver intel-ucode iwd kanshi kew
+			lib32-giflib lib32-gtk3 lib32-libpulse lib32-libxslt lib32-mpg123 lib32-ocl-icd lib32-openal lib32-v4l-utils libpulse libva-intel-driver limine linux-firmware linux-lts linux-lts-headers linuxconsole ly mako mono mpv nano nemo neovim niri ntfs-3g
+			nwg-look obs-studio openssh pastel pavucontrol pipewire pipewire-alsa pipewire-jack pipewire-pulse polkit python-pip python-pipx qt5-tools qt6-tools qt6ct retroarch rofi sassc slurp smartmontools starship sudo superfile supertux supertuxkart sway swaybg swayidle swaylock swww tmux
+			udiskie vim vulkan-intel vulkan-nouveau vulkan-radeon waybar wev wget wine winetricks wireless_tools wireplumber xdg-desktop-portal-gnome xdg-desktop-portal-hyprland xdg-utils xf86-video-amdgpu xf86-video-ati xf86-video-nouveau xorg-server xorg-xinit xorg-xwayland zram-generator
+		)
+
+		aur_pkgs=(
+			brave-bin debtap hypremoji hyprmon-bin mongodb-bin mov-cli python-mov-cli-youtube quickshell-git sdl2-jstest spotify sway-colord ttf-apple-emoji waypaper yay yay-debug zscroll-git
+		)
+
+		echo "removing pacman packages..."
+		for pkg in "${pkgs[@]}"; do
+			pacman -R --noconfirm "$pkg" 2>/dev/null || true
+		done
+
+		echo "removing AUR packages..."
+		for aur_pkg in "${aur_pkgs[@]}"; do
+			pacman -R --noconfirm "$aur_pkg" 2>/dev/null || true
+		done
+
+		echo "removing configuration files..."
+		rm -rf $HOME/mariiconfig
+		rm -rf $HOME/apple_cursor
+		rm -rf $HOME/Ilustraciones-icon-theme
+		rm -rf $HOME/Graphite-gtk-theme
+		rm -rf $HOME/.config/symlink.sh
+
+		echo " "
+		echo "uninstallation complete!"
+		sleep 2
+		exit
+	else
+		echo "uninstallation cancelled"
+		sleep 1
+		exit
+	fi
 fi
 
 if [ "$usr_choice1" == "n" ]; then
