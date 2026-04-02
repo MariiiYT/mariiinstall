@@ -126,9 +126,9 @@ if [ "$usr_choice1" == "u" ]; then
 		sleep 3
 		
 		pkgs=(
-			alacritty base base-devel blueman bluez bluez-obex bluez-utils cava chafa cliphist cmake cmatrix code cowsay cpio discord dotnet-sdk efibootmgr evtest fastfetch firejail fish font-manager fuzzel fzf gimp git grim gst-plugin-pipewire htop hypridle hyprland hyprlock hyprsunset intel-media-driver intel-ucode iwd kanshi kew
+			alacritty base base-devel blueman bluez bluez-obex bluez-utils cava chafa cliphist cmake cmatrix code cowsay cpio discord dotnet-sdk efibootmgr evtest fastfetch firejail fish font-manager fuzzel fzf gimp grim gst-plugin-pipewire htop hypridle hyprland hyprlock hyprsunset intel-media-driver intel-ucode iwd kanshi kew
 			lib32-giflib lib32-gtk3 lib32-libpulse lib32-libxslt lib32-mpg123 lib32-ocl-icd lib32-openal lib32-v4l-utils libpulse libva-intel-driver limine linux-firmware linux-lts linux-lts-headers linuxconsole ly mako mono mpv nano nemo neovim niri ntfs-3g
-			nwg-look obs-studio openssh pastel pavucontrol pipewire pipewire-alsa pipewire-jack pipewire-pulse polkit python-pip python-pipx qt5-tools qt6-tools qt6ct retroarch rofi sassc slurp smartmontools starship sudo superfile supertux supertuxkart sway swaybg swayidle swaylock swww tmux
+			nwg-look obs-studio openssh pastel pavucontrol pipewire pipewire-alsa pipewire-jack pipewire-pulse polkit python-pip python-pipx qt5-tools qt6-tools qt6ct retroarch rofi sassc slurp smartmontools starship superfile supertux supertuxkart sway swaybg swayidle swaylock swww tmux
 			udiskie vim vulkan-intel vulkan-nouveau vulkan-radeon waybar wev wget wine winetricks wireless_tools wireplumber xdg-desktop-portal-gnome xdg-desktop-portal-hyprland xdg-utils xf86-video-amdgpu xf86-video-ati xf86-video-nouveau xorg-server xorg-xinit xorg-xwayland zram-generator
 		)
 
